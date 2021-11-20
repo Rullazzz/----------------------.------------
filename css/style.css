@@ -1,0 +1,10 @@
+#about-text {
+    left: 15px;
+    position: relative;
+    top: 50%;
+}
+
+.tab-content {
+    position: relative;
+    top: 15px;
+}
