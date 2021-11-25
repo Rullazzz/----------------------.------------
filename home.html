@@ -47,10 +47,14 @@
             <label>Ваш файл</label>
             <input type="file" id="fileInput" accept=".csv,.txt,.xlsx" style="padding-bottom: 15px;" />
 
-            <table id="tableRoot"></table>
+            <table class="tableData" id="tableRoot"></table>
         </div>
         <div class="tab-pane" id="create" role="tabpanel" aria-labelledby="create-tab">2</div>
-        <div class="tab-pane" id="tabular-output" role="tabpanel" aria-labelledby="tabular-output-tab">3</div>
+        <div class="tab-pane" id="tabular-output" role="tabpanel" aria-labelledby="tabular-output-tab">
+          <label>Ваш файл</label>
+          <input type="file" id="fileInputTabularOutput" accept=".csv" style="padding-bottom: 15px;" />
+          <table class="tableData" id="tableRootTabularOutput"></table>
+        </div>
         <div class="tab-pane" id="graphical-output" role="tabpanel" aria-labelledby="graphical-output-tab">4</div>
         <div class="tab-pane" id="help" role="tabpanel" aria-labelledby="help-tab">
             <table id="tableHelp" class="table table-bordered table-striped">

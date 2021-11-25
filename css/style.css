@@ -10,7 +10,7 @@
 }
 
 /* Styles for the table */
-#tableRoot {
+.tableData {
     border-collapse: collapse;
     border-radius: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
@@ -20,15 +20,15 @@
     font-size: 14px;
 }
 
-#tableRoot th,
+.tableData th,
 #tableHelp th {
     background: #009578;
     color: #ffffff;
     text-align: left;
 }
 
-#tableRoot th,
-#tableRoot td {
+.tableData th,
+.tableData td {
     padding: 10px 20px;
 }
 
@@ -36,7 +36,7 @@
     The pseudo-class :nth-child is used to add a style to elements based on the numbering in the element tree 
     even - all even elements
 */
-#tableRoot tr:nth-child(even) {
+.tableData tr:nth-child(even) {
     background: #eeeeee;
 }
   
