@@ -1,7 +1,14 @@
 export default class {
-    constructor(className) {
+
+    /**
+     * 
+     * @param {string} className 
+     * @param {string[]} disciplines 
+     */
+    constructor(className, disciplines) {
         this.className = className;
         this.students = [];
+        this.disciplines = disciplines;
     }
 
     add(student) {
@@ -28,6 +35,17 @@ export default class {
             marks = marks.concat(student.marks);
         });
 
+        return marks;
+    }
+
+    getAllMarksByDiscipline(discipline) {
+        let marks = [];
+        let index = this.disciplines.indexOf(discipline, 0);
+        this.students.forEach(student => {
+            marks = marks.concat(student.marks[index]);
+        });
+
+        // console.log(marks);
         return marks;
     }
 
