@@ -58,8 +58,8 @@ export default class {
         
         if (values.length % 2)
           return values[half];
-        
-        return (values[half - 1] + values[half]) / 2.0;
+
+        return (Number(values[half - 1]) + Number(values[half])) / 2.0;
     }
 
     getCount(mark) {
@@ -71,13 +71,24 @@ export default class {
         return (marks.filter(m => m == mark).length / marks.length * 100).toFixed(1);
     }
 
-    getData() {
-        return [this.className, 
-                this.getAverageSchoolMark(), 
-                this.getMedian(), 
-                this.getCount('5') + `(${this.getPercentage('5')}%)`, 
-                this.getCount('4') + `(${this.getPercentage('4')}%)`, 
-                this.getCount('3') + `(${this.getPercentage('3')}%)`, 
-                this.getCount('2') + `(${this.getPercentage('2')}%)`];
+    getData(isPercentage = true) {
+        if (isPercentage) {
+            return [this.className, 
+                    this.getAverageSchoolMark(), 
+                    this.getMedian(), 
+                    this.getCount('5') + `(${this.getPercentage('5')}%)`, 
+                    this.getCount('4') + `(${this.getPercentage('4')}%)`, 
+                    this.getCount('3') + `(${this.getPercentage('3')}%)`, 
+                    this.getCount('2') + `(${this.getPercentage('2')}%)`];
+        } else {
+            return [this.className, 
+                    this.getAverageSchoolMark(), 
+                    this.getMedian(), 
+                    this.getCount('5'), 
+                    this.getCount('4'), 
+                    this.getCount('3'), 
+                    this.getCount('2')];
+        }
+        
     }
 }

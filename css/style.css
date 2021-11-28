@@ -9,6 +9,10 @@
     top: 15px;
 }
 
+p {
+    max-width: 900px;
+}
+
 /* Styles for the table */
 .tableData {
     border-collapse: collapse;

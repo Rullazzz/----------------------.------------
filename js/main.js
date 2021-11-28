@@ -15,6 +15,34 @@ const tableBuilderLoad = new TableBuilder(tableRoot);
 const tableBuilderTabularOutput = new TableBuilder(tableRootTabularOutput);
 const tableBuilderTabularOutput2 = new TableBuilder(tableRootTabularOutput2);
 
+const chartClasses = new Chart(document.getElementById("bar-chart-grouped-classes"), {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: []
+    },
+    options: {
+      title: {
+        display: true
+      },
+      maintaionAspectRation: true,
+    }
+});
+
+const chartDisciplines = new Chart(document.getElementById("bar-chart-grouped-disciplines"), {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: []
+    },
+    options: {
+      title: {
+        display: true
+      },
+      maintaionAspectRation: true,
+    }
+});
+
 
 fileInput.addEventListener("change", (e) => {  
     let fileName = fileInput.files[0].name;
@@ -42,7 +70,6 @@ fileInput.addEventListener("change", (e) => {
         reader.onload = (e) => {
             const file = e.target.result;
             const lines = file.split(/\r\n|\n/);
-            console.log(lines);
 
             let data = [];
             for (let i = 0; i < lines.length; i++) 
@@ -87,14 +114,24 @@ fileInputTabularOutput.addEventListener("change", (e) => {
                 }
             });            
 
-            let headers = ['class', 'av. mark', 'median', '5', '4', '3', '2'];
+            let headers = ['class', 'avg. mark', 'median', '5', '4', '3', '2'];
             let classesData = [];
             classes.forEach(schoolClass => {
                 classesData.push(schoolClass.getData());
             });
 
             tableBuilderTabularOutput.update(classesData, headers);
-            tableBuilderTabularOutput2.update(getDisciplineData(classes), ['discipline', 'av. mark', 'median', '5', '4', '3', '2']);
+            tableBuilderTabularOutput2.update(getDisciplinesData(classes, true), ['discipline', 'avg. mark', 'median', '5', '4', '3', '2']);
+
+            const labels = ['avg. mark', 'median', '5', '4', '3', '2'];
+            const dataClasses = createDataClasses(classes, labels);
+            const dataDisciplines = createDataDisciplines(classes, labels);
+
+            chartClasses.data = dataClasses;
+            chartDisciplines.data = dataDisciplines;
+
+            chartClasses.update();
+            chartDisciplines.update();
         }
     });
 });
@@ -102,9 +139,9 @@ fileInputTabularOutput.addEventListener("change", (e) => {
 /**
  * 
  * @param {SchoolClass[]} classes 
- * @returns {string[][]}
+ * @returns {string[][]} statisticsDisciplines
  */
-function getDisciplineData(classes) {
+function getDisciplinesData(classes, isPercentage) {
     let statisticsDisciplines = []; 
     let disciplines = classes[0].disciplines;
 
@@ -119,13 +156,24 @@ function getDisciplineData(classes) {
         let avgMark = getAvgMark(marks);
         let median = getMedian(marks);
 
-        statistics = [discipline, 
-                      avgMark, 
-                      median, 
-                      getCount(marks, '5') + `(${getPercentage(marks, '5')}%)`, 
-                      getCount(marks, '4') + `(${getPercentage(marks, '4')}%)`, 
-                      getCount(marks, '3') + `(${getPercentage(marks, '3')}%)`, 
-                      getCount(marks, '2') + `(${getPercentage(marks, '2')}%)`];
+        if (isPercentage) {
+            statistics = [discipline, 
+                avgMark, 
+                median, 
+                getCount(marks, '5') + `(${getPercentage(marks, '5')}%)`, 
+                getCount(marks, '4') + `(${getPercentage(marks, '4')}%)`, 
+                getCount(marks, '3') + `(${getPercentage(marks, '3')}%)`, 
+                getCount(marks, '2') + `(${getPercentage(marks, '2')}%)`];
+        } else {
+            statistics = [discipline, 
+                avgMark, 
+                median, 
+                getCount(marks, '5'), 
+                getCount(marks, '4'), 
+                getCount(marks, '3'), 
+                getCount(marks, '2')];
+        }
+        
                       
         statisticsDisciplines.push(statistics);
     }
@@ -151,7 +199,7 @@ function getMedian(marks) {
     if (values.length % 2)
         return values[half];
     
-    return (values[half - 1] + values[half]) / 2.0;
+    return (Number(values[half - 1]) + Number(values[half])) / 2.0;
 }
 
 function getCount(marks, mark) {
@@ -160,4 +208,65 @@ function getCount(marks, mark) {
 
 function getPercentage(marks, mark) {
     return (marks.filter(m => m == mark).length / marks.length * 100).toFixed(1);
+}
+
+function random_rgba() {
+    var o = Math.round, r = Math.random, s = 255;
+    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + 1 + ')';
+}
+
+/**
+ * 
+ * @param {SchoolClass[]} classes 
+ * @param {string[]} labels 
+ * @returns dataClasses
+ */
+function createDataClasses(classes, labels) {
+    let datasets = [];
+
+    classes.forEach(schoolClass => {
+        let dataset = {
+            label: schoolClass.className,
+            data: schoolClass.getData(false).slice(1),
+            backgroundColor: random_rgba(),
+        }
+        datasets.push(dataset);
+    });
+
+    const data = {
+        labels: labels,
+        datasets: datasets
+    };
+
+    return data;
+}
+
+/**
+ * 
+ * @param {choolClass[]} classes 
+ * @param {string[]} labels 
+ * @returns dataDisciplines
+ */
+function createDataDisciplines(classes, labels) {
+    let datasets = [];
+    let disciplinesData = getDisciplinesData(classes, false);
+    let disciplines = classes[0].disciplines;
+
+    disciplines.forEach(discipline => {
+        let data = disciplinesData.filter(d => d.includes(discipline))[0].slice(1);
+
+        let dataset = {
+            label: discipline,
+            data: data,
+            backgroundColor: random_rgba(),
+        }
+        datasets.push(dataset);
+    });
+
+    const data = {
+        labels: labels,
+        datasets: datasets
+    };
+
+    return data;
 }

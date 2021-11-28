@@ -57,7 +57,14 @@
           <br>
           <table class="tableData" id="tableRootTabularOutput2"></table>
         </div>
-        <div class="tab-pane" id="graphical-output" role="tabpanel" aria-labelledby="graphical-output-tab">4</div>
+        <div class="tab-pane" id="graphical-output" role="tabpanel" aria-labelledby="graphical-output-tab">
+          <p>
+            <canvas id="bar-chart-grouped-classes" width="800" height="450"></canvas>
+          </p>
+          <p>
+            <canvas id="bar-chart-grouped-disciplines" width="800" height="450"></canvas>
+          </p>
+        </div>
         <div class="tab-pane" id="help" role="tabpanel" aria-labelledby="help-tab">
             <table id="tableHelp" class="table table-bordered table-striped">
                 <thead>
@@ -120,6 +127,8 @@
     <script src="js/papaparse.min.js"></script>
     <!-- Required to work with the extension .xlsx -->
     <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
+    <!-- Required for working with graphs -->
+    <script src="/js/charts.min.js"></script>
     <script type="module" src="/js/main.js"></script>
 </body>
 
