@@ -25,7 +25,6 @@ const chartClasses = new Chart(document.getElementById("bar-chart-grouped-classe
       title: {
         display: true
       },
-      maintaionAspectRation: true,
     }
 });
 
@@ -39,7 +38,6 @@ const chartDisciplines = new Chart(document.getElementById("bar-chart-grouped-di
       title: {
         display: true
       },
-      maintaionAspectRation: true,
     }
 });
 
@@ -173,8 +171,7 @@ function getDisciplinesData(classes, isPercentage) {
                 getCount(marks, '3'), 
                 getCount(marks, '2')];
         }
-        
-                      
+                 
         statisticsDisciplines.push(statistics);
     }
     return statisticsDisciplines;
