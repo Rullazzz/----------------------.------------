@@ -1,7 +1,16 @@
 #about-text {
     left: 15px;
-    position: relative;
+    position: absolute;
     top: 50%;
+}
+
+#myTab {
+    background-color: rgb(115, 179, 90);
+}
+
+#load, #tabular-output, #graphical-output {
+    margin-left: 50px;
+    margin-bottom: 50px;
 }
 
 .tab-content {
@@ -13,15 +22,19 @@ p {
     max-width: 900px;
 }
 
+body {
+    background-color: rgb(141, 204, 230);
+}
+
 /* Styles for the table */
 .tableData {
     border-collapse: collapse;
     border-radius: 5px;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
-    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
     font-family: "Quicksand", sans-serif;
-    font-weight: bold;
     font-size: 14px;
+    font-weight: bold;
+    overflow: hidden;
 }
 
 .tableData th,
@@ -42,5 +55,9 @@ p {
 */
 .tableData tr:nth-child(even) {
     background: #eeeeee;
+}
+
+.tableData tr:nth-child(odd) {
+    background: silver;
 }
   

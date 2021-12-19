@@ -9,7 +9,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -19,10 +19,6 @@
             <button class="nav-link active" id="load-tab" data-bs-toggle="tab" data-bs-target="#load" type="button"
                 role="tab" aria-controls="load" aria-selected="true">Загрузить</button>
         </li>
-        <!-- <li class="nav-item" role="presentation">
-            <button class="nav-link" id="create-tab" data-bs-toggle="tab" data-bs-target="#create" type="button"
-                role="tab" aria-controls="create" aria-selected="false">Создать</button>
-        </li> -->
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="tabular-output-tab" data-bs-toggle="tab" data-bs-target="#tabular-output" type="button"
                 role="tab" aria-controls="tabular-output" aria-selected="false">Табличный вывод</button>
@@ -49,7 +45,6 @@
 
             <table class="tableData" id="tableRoot"></table>
         </div>
-        <div class="tab-pane" id="create" role="tabpanel" aria-labelledby="create-tab">2</div>
         <div class="tab-pane" id="tabular-output" role="tabpanel" aria-labelledby="tabular-output-tab">
           <label>Ваш файл</label>
           <input type="file" id="fileInputTabularOutput" accept=".csv" style="padding-bottom: 15px;" />
@@ -78,10 +73,6 @@
                     <td>Загрузить</td>
                     <td>В этой вкладке вы можете загрузить таблицы(в форматах .сsv, .txt, .xlsx)</td>
                   </tr>
-                  <!-- <tr>
-                    <td>Создать</td>
-                    <td>В этой вкладке вы можете создавать и редактировать таблицу</td>
-                  </tr> -->
                   <tr>
                     <td>Табличный вывод</td>
                     <td>В этой вкладке вы можете вывести свою таблицу в табличном виде</td>
@@ -102,22 +93,14 @@
               </table>
         </div>
         <div class="tab-pane" id="about" role="tabpanel" aria-labelledby="about-tab">
-            <div class="row">
-                <div class="col">
-                    <div id="about-text"">                        
-                        <p class="fs-2 fst-italic">
-                            Создатель сайта: Сысюк Захар Николаевич
-                        </p>
-                        <!-- <p class="fs-2 fst-italic">
-                            Номер: 8-800-555-35-35
-                        </p> -->
-                    </div>                          
-                </div>
-                
-                <div class="col">
-                    <img src="/img/triangle.jpg" alt="image" class="img-thumbnail">
-                </div>
-              </div>
+          <div id="about-text">
+            <p class="fs-2 fst-italic">
+              Создатель сайта: Сысюк Захар Николаевич, студент группы ИА-031
+            </p>
+            <p>
+              <img src="img/rikardo.jpg" alt="image" class="img-thumbnail">
+            </p>
+          </div>
         </div>
     </div>
 
@@ -128,8 +111,8 @@
     <!-- Required to work with the extension .xlsx -->
     <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
     <!-- Required for working with graphs -->
-    <script src="/js/charts.min.js"></script>
-    <script type="module" src="/js/main.js"></script>
+    <script src="js/charts.min.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 
 </html>
